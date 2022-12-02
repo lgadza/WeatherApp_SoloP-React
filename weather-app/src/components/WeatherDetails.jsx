@@ -42,10 +42,13 @@ const WeatherDetails = () => {
       <Row>
         <Col md={9}>
           <Card className="bg-dark text-white align-items-center">
-            <Card.Img
-              src="https://th.bing.com/th/id/R.069cf185a7daba4caceb8e10e84da46b?rik=H6UDZfO%2b56isFg&riu=http%3a%2f%2fwww.pixelstalk.net%2fwp-content%2fuploads%2f2016%2f07%2fDownload-Free-Weather-Background.jpg&ehk=JNt8y9ofXKAnT7OCpITBYQSnexCUjI9Hmcb24SZmQrs%3d&risl=&pid=ImgRaw&r=0"
-              alt="Card image"
-            />
+            <div className="image">
+              <div className="cardimage"></div>
+              <Card.Img
+                src="https://th.bing.com/th/id/R.069cf185a7daba4caceb8e10e84da46b?rik=H6UDZfO%2b56isFg&riu=http%3a%2f%2fwww.pixelstalk.net%2fwp-content%2fuploads%2f2016%2f07%2fDownload-Free-Weather-Background.jpg&ehk=JNt8y9ofXKAnT7OCpITBYQSnexCUjI9Hmcb24SZmQrs%3d&risl=&pid=ImgRaw&r=0"
+                alt="Card image"
+              />
+            </div>
             <Card.ImgOverlay>
               <Card.Title>
                 {cityInfo[cityInfo.length - 1].name},{"  "}{" "}

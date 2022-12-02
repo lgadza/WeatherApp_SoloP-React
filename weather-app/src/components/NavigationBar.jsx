@@ -1,12 +1,12 @@
-import { Container, Form, Nav, Navbar, Row, Col } from "react-bootstrap/";
+import { Container, Form, Navbar, Row, Col } from "react-bootstrap/";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import SearchCity from "./SearchCity";
+import { Link } from "react-router-dom";
 
 const NavigationBar = () => {
   const [query, setQuery] = useState("");
-  //   const [lat, setLat] = useState([]);
-  // const [lon, setLon] = useState([]);
+
   const [cityInfo, setCityInfo] = useState(null);
   const dispatch = useDispatch();
 
@@ -23,11 +23,10 @@ const NavigationBar = () => {
       const response = await fetch(baseEndpoint);
       if (response.ok) {
         const data = await response.json();
-        // setLat(data[0].lat);
-        // setLon(data[0].lon);
+
         setCityInfo(data[0]);
         console.log(data[0].lat);
-        // console.log()
+
         dispatch({
           type: "GET-CITY-INFO",
           payload: data[0],
@@ -58,14 +57,7 @@ const NavigationBar = () => {
       </Navbar>
       <Navbar bg="light" expand="lg">
         <Container fluid>
-          <Nav.Link href="#action1">Today</Nav.Link>
-          <Nav.Link href="#action2">3 Day</Nav.Link>
-          <Nav.Link href="#action2">3 Day</Nav.Link>
-          <Nav.Link href="#action2">3 Day</Nav.Link>
-          <Nav.Link href="#action2">3 Day</Nav.Link>
-          <Nav.Link href="#action2">3 Day</Nav.Link>
-          <Nav.Link href="#action2">3 Day</Nav.Link>
-          <Nav.Link href="#action2">3 Day</Nav.Link>
+          <Link to={"/weather-maps"}>Weather Maps</Link>
         </Container>
       </Navbar>
       <Container>
