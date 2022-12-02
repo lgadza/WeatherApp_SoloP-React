@@ -37,7 +37,7 @@
   }
 }
 .searchWeather {
-  width: 80%;
+  width: 60vw !important;
 }
 .image {
   position: relative;

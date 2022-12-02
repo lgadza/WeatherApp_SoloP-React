@@ -8,7 +8,7 @@ import WeatherMaps from "./components/WeatherMaps";
 function App() {
   return (
     <BrowserRouter>
-      <NavigationBar />
+      <NavigationBar path="/" />
       <Routes>
         <Route element={<WeatherMaps />} path="/weather-maps"></Route>
       </Routes>

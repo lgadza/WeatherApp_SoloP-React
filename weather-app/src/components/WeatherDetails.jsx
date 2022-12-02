@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import WeatherMaps from "./WeatherMaps";
+import { WiDayCloudyHigh } from "react-icons/wi";
 
 const WeatherDetails = () => {
   const cityInfo = useSelector((state) => state.cityInfo.content);
@@ -40,7 +42,7 @@ const WeatherDetails = () => {
   return (
     <Container>
       <Row>
-        <Col md={9}>
+        <Col md={8}>
           <Card className="bg-dark text-white align-items-center">
             <div className="image">
               <div className="cardimage"></div>
@@ -58,15 +60,25 @@ const WeatherDetails = () => {
               {infoo && (
                 <>
                   <Card.Text className="mb-5">{info.weather[0].main}</Card.Text>
+                  <Card.Text className="mb-5">
+                    <div>
+                      {new Date().getFullYear() +
+                        "-" +
+                        (new Date().getMonth() + 1) +
+                        "-" +
+                        new Date().getDate()}
+                    </div>
+                  </Card.Text>
                   <div className="d-flex mt-5 align-items-center">
                     <Col>
                       <div className="d-flex">
-                        <div>{info.weather[0].icon}</div>
-                        <div className="mx-4">
-                          Temperature: {"  "}
-                          {info.main.temp}
+                        <div>
+                          <WiDayCloudyHigh size={80} />
                         </div>
-                        <div>{info.weather[0].description}</div>
+                        <div className="mx-4">
+                          Temp: {"  "}
+                          {info.main.temp} F
+                        </div>
                       </div>
                     </Col>
                     <Col>
@@ -83,10 +95,14 @@ const WeatherDetails = () => {
                       </div>
                     </Col>
                   </div>
+                  <div className="mt-5">{info.weather[0].description}</div>
                 </>
               )}
             </Card.ImgOverlay>
           </Card>
+        </Col>
+        <Col md={4}>
+          <WeatherMaps />
         </Col>
       </Row>
     </Container>

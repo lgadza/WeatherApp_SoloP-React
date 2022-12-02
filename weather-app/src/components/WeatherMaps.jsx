@@ -33,10 +33,6 @@ const WeatherMaps = () => {
     }
   };
 
-  // useEffect(() => {
-  //   getCity();
-  // }, [cityInfo]);
-
   return (
     <Col>
       <h1>Weather maps</h1>

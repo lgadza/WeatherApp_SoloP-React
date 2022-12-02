@@ -42,14 +42,16 @@ const NavigationBar = () => {
     <>
       <Navbar bg="light" expand="lg">
         <Container fluid>
-          <Navbar.Brand href="#">WeatherFocast</Navbar.Brand>
+          <Link to="/" className="navbar-brand">
+            WeatherFocast
+          </Link>
 
           <Form className="d-flex justify-content-end" onSubmit={handleSubmit}>
             <Form.Control
               type="search"
               onChange={handleChange}
               placeholder="Search City Name"
-              className="me-2 searchWeather ml-5  "
+              className="me-2 searchWeather  ml-5  "
               aria-label="Search"
             />
           </Form>
