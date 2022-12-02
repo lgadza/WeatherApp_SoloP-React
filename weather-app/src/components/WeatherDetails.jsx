@@ -1,14 +1,14 @@
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-// import { Heart } from "react-bootstrap-icons";
-// import Button from "react-bootstrap/Button";
-import { useDispatch } from "react-redux";
+
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
-const WeatherDetails = ({ cityInfo, lat, lon }) => {
+const WeatherDetails = ({ lat, lon }) => {
   const [info, setInfo] = useState([]);
   const params = useParams();
   const dispatch = useDispatch();
+  const cityInfo = useSelector((state) => state.cityInfo.content);
 
   const baseEndpoint = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=dec2de007a481ae02cb877724ec8a8ac`;
 

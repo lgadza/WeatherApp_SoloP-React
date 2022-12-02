@@ -1,12 +1,14 @@
 import { Container, Form, Nav, Navbar, Row, Col } from "react-bootstrap/";
 import { useState } from "react";
 import SearchCity from "./SearchCity";
+import { useDispatch } from "react-redux";
 
 const NavigationBar = () => {
   const [query, setQuery] = useState("");
-  const [lat, setLat] = useState([53.127505049999996]);
-  const [lon, setLon] = useState([23.147050870161664]);
+  const [lat, setLat] = useState([]);
+  const [lon, setLon] = useState([]);
   const [cityInfo, setCityInfo] = useState([]);
+  const dispatch = useDispatch();
 
   const baseEndpoint = `http://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=1&appid=dec2de007a481ae02cb877724ec8a8ac`;
 
@@ -25,6 +27,11 @@ const NavigationBar = () => {
         setLon(data[0].lon);
         setCityInfo(data[0]);
         console.log(data[0].lat);
+        // console.log()
+        dispatch({
+          type: "GET-CITY-INFO",
+          payload: data[0],
+        });
       } else {
         alert("Error fetching results");
       }
@@ -65,7 +72,7 @@ const NavigationBar = () => {
         <Row>
           <Col>
             {cityInfo.length !== 0 ? (
-              <SearchCity Lat={lat} Lon={lon} info={cityInfo} />
+              <SearchCity Lat={lat} Lon={lon} infomation={cityInfo} />
             ) : (
               []
             )}
