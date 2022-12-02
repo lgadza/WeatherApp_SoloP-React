@@ -4,25 +4,31 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
-const WeatherDetails = ({ lat, lon }) => {
-  const [info, setInfo] = useState([]);
-  const params = useParams();
-  const dispatch = useDispatch();
+const WeatherDetails = () => {
   const cityInfo = useSelector((state) => state.cityInfo.content);
+  console.log(cityInfo[0].lat);
+  const [info, setInfo] = useState([]);
+  const [infoo, setInfoo] = useState(null);
+  console.log(info);
 
-  const baseEndpoint = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=dec2de007a481ae02cb877724ec8a8ac`;
+  const baseEndpoint = `https://api.openweathermap.org/data/2.5/weather?lat=${
+    cityInfo[cityInfo.length - 1].lat
+  }&lon=${
+    cityInfo[cityInfo.length - 1].lon
+  }&appid=dec2de007a481ae02cb877724ec8a8ac`;
 
   useEffect(() => {
-    getJobs();
-  }, []);
+    getCity();
+  }, [cityInfo]);
 
-  const getJobs = async () => {
+  const getCity = async () => {
     try {
       const response = await fetch(baseEndpoint);
       if (response.ok) {
         const data = await response.json();
-        console.log(data.main.temp);
         setInfo(data);
+        setInfoo(data);
+        console.log(info.weather);
       } else {
         alert("Error fetching results");
       }
@@ -30,7 +36,7 @@ const WeatherDetails = ({ lat, lon }) => {
       console.log(error);
     }
   };
-  //   const temp = ((info.main.temp - 32) * 5) / 9;
+
   return (
     <Container>
       <Row>
@@ -42,35 +48,40 @@ const WeatherDetails = ({ lat, lon }) => {
             />
             <Card.ImgOverlay>
               <Card.Title>
-                {cityInfo.name},{"  "} {cityInfo.country},{"  "}
-                {cityInfo.state}
+                {cityInfo[cityInfo.length - 1].name},{"  "}{" "}
+                {cityInfo[cityInfo.length - 1].country},{"  "}
+                {cityInfo[cityInfo.length - 1].state}
               </Card.Title>
-              <Card.Text className="mb-5">{info.weather[0].main}</Card.Text>
-              <div className="d-flex mt-5 align-items-center">
-                <Col>
-                  <div className="d-flex">
-                    <div>{info.weather[0].icon}</div>
-                    <div className="mx-4">
-                      Temperature: {"  "}
-                      {info.main.temp}
-                    </div>
-                    <div>{info.weather[0].description}</div>
+              {infoo && (
+                <>
+                  <Card.Text className="mb-5">{info.weather[0].main}</Card.Text>
+                  <div className="d-flex mt-5 align-items-center">
+                    <Col>
+                      <div className="d-flex">
+                        <div>{info.weather[0].icon}</div>
+                        <div className="mx-4">
+                          Temperature: {"  "}
+                          {info.main.temp}
+                        </div>
+                        <div>{info.weather[0].description}</div>
+                      </div>
+                    </Col>
+                    <Col>
+                      <div>
+                        {" "}
+                        Wind: {"  "}
+                        {info.wind.speed} {"  "}KMPH
+                      </div>
+                      <div>
+                        Visibility:{"  "} {info.visibility}
+                      </div>
+                      <div>
+                        Humidity:{"  "} {info.main.humidity}%
+                      </div>
+                    </Col>
                   </div>
-                </Col>
-                <Col>
-                  <div>
-                    {" "}
-                    Wind: {"  "}
-                    {info.wind.speed} {"  "}KMPH
-                  </div>
-                  <div>
-                    Visibility:{"  "} {info.visibility}
-                  </div>
-                  <div>
-                    Humidity:{"  "} {info.main.humidity}%
-                  </div>
-                </Col>
-              </div>
+                </>
+              )}
             </Card.ImgOverlay>
           </Card>
         </Col>
