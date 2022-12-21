@@ -5,19 +5,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import WeatherMaps from "./WeatherMaps";
 import { WiDayCloudyHigh } from "react-icons/wi";
+import WeatherHistory from "./WeatherHistory";
 
 const WeatherDetails = () => {
   const cityInfo = useSelector((state) => state.cityInfo.content);
   console.log(cityInfo[0].lat);
   const [info, setInfo] = useState([]);
+  // const [tempInfo, setTempInfo] = useState([]);
   const [infoo, setInfoo] = useState(null);
   console.log(info);
 
+  // const baseEndpoint = `https://api.openweathermap.org/data/2.5/weather?lat=${
+  //   cityInfo[cityInfo.length - 1].lat
+  // }&lon=${
+  //   cityInfo[cityInfo.length - 1].lon
+  // }&appid=dec2de007a481ae02cb877724ec8a8ac`;
   const baseEndpoint = `https://api.openweathermap.org/data/2.5/weather?lat=${
     cityInfo[cityInfo.length - 1].lat
   }&lon=${
     cityInfo[cityInfo.length - 1].lon
-  }&appid=dec2de007a481ae02cb877724ec8a8ac`;
+  }&appid=dec2de007a481ae02cb877724ec8a8ac&units=metric`;
 
   useEffect(() => {
     getCity();
@@ -77,7 +84,7 @@ const WeatherDetails = () => {
                         </div>
                         <div className="mx-4">
                           Temp: {"  "}
-                          {info.main.temp} F
+                          {info.main.temp} &deg;C
                         </div>
                       </div>
                     </Col>
@@ -103,6 +110,7 @@ const WeatherDetails = () => {
         </Col>
         <Col md={4}>
           <WeatherMaps />
+          {infoo && <WeatherHistory />}
         </Col>
       </Row>
     </Container>
